@@ -36,7 +36,7 @@ jobs:
         run: nuget restore ArcDPS-Updater.sln
 
       - name: Build the Solution
-        run: msbuild ArcDPS-Updater.sln /p:Configuration=Debug
+        run: msbuild -r -t:Rebuild ArcDPS-Updater.sln /p:Configuration=Debug
 
       - name: Run Unittests
         run: vstest.console.exe "ArcDPS-Updater-Tests\bin\Debug\netcoreapp3.1\ArcDPS-Updater-Tests.dll"
