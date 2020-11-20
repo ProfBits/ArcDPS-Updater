@@ -11,3 +11,9 @@
 [![CI next Release](https://github.com/ProfBits/ArcDPS-Updater/workflows/Upcoming%20Release%20CI/badge.svg)](https://github.com/ProfBits/ArcDPS-Updater/actions?query=workflow%3A%22Upcoming+Release+CI%22)
 
 ## Overview
+
+ArcDPS-Updater is a small utility tool to help you update, de- and reinstall you [Guild Wars 2](https://www.guildwars2.com/) [ArcDPS](http://www.deltaconnected.com/arcdps/) installation.
+
+## Current Status
+
+Start of development.
