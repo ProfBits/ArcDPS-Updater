@@ -1,20 +1,21 @@
-# Runs for every push to a pull request on develop e.g. test ever new pushed commit.
+# Runs only for new Versions e.g. push or merge on master.
 
-name: Development CI
+name: Current Release CI
 
 on:
-  workflow_dispatch:
-  pull_request:
-    branches: [ develop ]
+  push:
+    branches: [ master ]
 
 jobs:
+
   build:
+  
     runs-on: windows-latest
+
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
 
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v1
@@ -28,16 +29,16 @@ jobs:
       - name: Restore NuGet packages
         run: nuget restore ArcDPS-Updater.sln
 
-      # Build the Solution with the configuration Debug
+      # Build the Solution with the configuration Release
       - name: Build the Solution
-        run: msbuild -r -t:Rebuild ArcDPS-Updater.sln /p:Configuration=Debug
+        run: msbuild -r -t:Rebuild ArcDPS-Updater.sln /p:Configuration=Release
 
       - name: Run Unittests
-        run: vstest.console.exe "ArcDPS-Updater-Tests\bin\Debug\netcoreapp3.1\ArcDPS-Updater-Tests.dll"
+        run: vstest.console.exe "ArcDPS-Updater-Tests\bin\Release\netcoreapp3.1\ArcDPS-Updater-Tests.dll"
         
       # Collect the build results
       - name: Collect Artifacts
         uses: actions/upload-artifact@v2
         with:
-            name: buildResultDEBUG
-            path: ArcDPS-Updater/bin/Debug/netcoreapp3.1/
+            name: buildResult
+            path: ArcDPS-Updater/bin/Release/netcoreapp3.1/
